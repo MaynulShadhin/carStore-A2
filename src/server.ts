@@ -1,10 +1,15 @@
 import mongoose from 'mongoose';
 import config from './app/config';
+import app from './app';
 
 async function main() {
-  await mongoose.connect(config.database_url as string);
+  try {
+    await mongoose.connect(config.database_url as string);
+    app.listen(config.port, () => {
+      console.log(`app listening on port ${config.port}`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
-
-app.listen(config.port, () => {
-  console.log(`app listening on port ${config.port}`);
-});
+main();
