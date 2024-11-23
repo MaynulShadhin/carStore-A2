@@ -31,8 +31,22 @@ const getSpecificCarFromDB = async (id: string) => {
   return result;
 };
 
+// update a car
+const updateCarInDB = async (carId: string, carData: Partial<TCar>) => {
+  const updatedCar = await CarModel.findByIdAndUpdate(
+    new ObjectId(carId),
+    { $set: carData },
+    { new: true },
+  );
+  if (!updatedCar) {
+    throw new Error('Car not found');
+  }
+  return updatedCar;
+};
+
 export const carServices = {
   createCarIntoDB,
   getAllCarsFromDB,
   getSpecificCarFromDB,
+  updateCarInDB,
 };

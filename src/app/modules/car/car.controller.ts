@@ -59,8 +59,29 @@ const getSpecificCar = async (req: Request, res: Response) => {
   }
 };
 
+//update a car
+const updateCar = async (req: Request, res: Response) => {
+  try {
+    const { carId } = req.params;
+    const carData = req.body;
+    const updatedCar = await carServices.updateCarInDB(carId, carData);
+    res.status(200).json({
+      success: true,
+      message: 'Car updated successfully',
+      data: updatedCar,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Something went wrong',
+      error,
+    });
+  }
+};
+
 export const carController = {
   createCar,
   getAllCars,
   getSpecificCar,
+  updateCar,
 };

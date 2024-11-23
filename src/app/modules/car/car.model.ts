@@ -17,6 +17,7 @@ const carSchema = new Schema<TCar>(
     },
     price: {
       type: Number,
+      min: [0, 'Price must be a positive number, received {VALUE}'],
       required: [true, 'Price is required'],
     },
     category: {
