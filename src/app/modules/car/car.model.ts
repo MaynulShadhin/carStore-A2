@@ -33,7 +33,11 @@ const carSchema = new Schema<TCar>(
       type: String,
       required: true,
     },
-    quantity: { type: Number, required: true },
+    quantity: {
+      type: Number,
+      required: true,
+      min: [0, 'Quantity must be a positive number, received {VALUE}'],
+    },
     inStock: {
       type: Boolean,
       required: true,

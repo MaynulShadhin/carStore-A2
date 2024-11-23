@@ -13,9 +13,9 @@ const getAllCarsFromDB = async (searchTerm?: string) => {
   const query: any = {};
   if (searchTerm) {
     query.$or = [
-      { brand: { $eq: searchTerm } },
-      { model: { $eq: searchTerm } },
-      { category: { $eq: searchTerm } },
+      { brand: { $regex: searchTerm, $options: 'i' } },
+      { model: { $regex: searchTerm, $options: 'i' } },
+      { category: { $regex: searchTerm, $options: 'i' } },
     ];
   }
   const result = await CarModel.find(query);
@@ -44,9 +44,19 @@ const updateCarInDB = async (carId: string, carData: Partial<TCar>) => {
   return updatedCar;
 };
 
+//delete a car
+const deleteCarFromDB = async (id: string) => {
+  const result = await CarModel.findByIdAndDelete(new ObjectId(id));
+  if (!result) {
+    throw new Error('Car not found');
+  }
+  return result;
+};
+
 export const carServices = {
   createCarIntoDB,
   getAllCarsFromDB,
   getSpecificCarFromDB,
   updateCarInDB,
+  deleteCarFromDB,
 };

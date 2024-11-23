@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import { carServices } from './car.service';
+import carValidationSchema from './car.validation';
 
 //create car
 const createCar = async (req: Request, res: Response) => {
   try {
     const carData = req.body;
-    const result = await carServices.createCarIntoDB(carData);
+    const zodParsedData = carValidationSchema.parse(carData);
+    const result = await carServices.createCarIntoDB(zodParsedData);
     res.status(200).json({
       success: true,
       message: 'Car created successfully',
@@ -33,7 +35,7 @@ const getAllCars = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(500).json({
       success: false,
-      message: error.message || 'Something went wrong',
+      message: 'Validation failed',
       error,
     });
   }
@@ -79,9 +81,29 @@ const updateCar = async (req: Request, res: Response) => {
   }
 };
 
+//delete a car
+const deleteCar = async (req: Request, res: Response) => {
+  try {
+    const { carId } = req.params;
+    const result = await carServices.deleteCarFromDB(carId);
+    res.status(200).json({
+      success: true,
+      message: 'Car deleted successfully',
+      result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Something went wrong',
+      error,
+    });
+  }
+};
+
 export const carController = {
   createCar,
   getAllCars,
   getSpecificCar,
   updateCar,
+  deleteCar,
 };
