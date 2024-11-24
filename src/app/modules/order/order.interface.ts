@@ -1,6 +1,6 @@
 export interface TOrder {
-    email: string;
-    car: string,
-    quantity: number;
-    totalPrice: number;
+  email: string;
+  car: string;
+  quantity: number;
+  totalPrice: number;
 }

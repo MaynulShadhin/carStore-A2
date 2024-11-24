@@ -45,7 +45,6 @@ const getAllCars = async (req: Request, res: Response) => {
 const getSpecificCar = async (req: Request, res: Response) => {
   try {
     const { carId } = req.params;
-    console.log('receive:', carId);
     const result = await carServices.getSpecificCarFromDB(carId);
     res.status(200).json({
       success: true,
