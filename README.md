@@ -38,5 +38,20 @@ Make sure you have the following installed:
     ```bash
     git clone <repository-url>
     cd car-store
-    
-2. Install Dependencies
+
+2. **Install Dependencies**
+    ```bash
+    npm install
+
+3. **Environment Setup**
+create a .env file in the root directory and include the following variables:
+    ```bash
+    PORT=5000
+    DATABASE_URL=<your mongodb connection url string>
+
+4. **Run the Application**
+    ```bash
+    npm run start:dev
+The application will be accessible at http://localhost:5000.
+
+
