@@ -1,4 +1,4 @@
-# **Car Store Application
+# **Car Store Application**
 
 A modern car sale platform designed to provide a seamless experience for buyers and seller
 
