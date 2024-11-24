@@ -3,7 +3,7 @@
 A modern car sale platform designed to provide a seamless experience for buyers and seller
 
 ## **Live Link**
-[https://carstore-a2v3.vercel.app/](#car-store-application)
+[https://carstore-a2v3.vercel.app/]
 
 ---
 
